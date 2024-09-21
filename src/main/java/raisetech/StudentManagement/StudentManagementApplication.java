@@ -39,6 +39,11 @@ public class StudentManagementApplication {
 		this.name = name;
 	}
 
+	@PostMapping("/studentAge")
+	public void updateStudentAge(String age){
+		this.age = age;
+	}
+
 	//GET POST
 	//GETは取得する、リクエストの結果を受け取る。
 	//POSTは情報を与える、渡す。
