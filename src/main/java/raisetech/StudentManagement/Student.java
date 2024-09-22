@@ -3,6 +3,7 @@ package raisetech.StudentManagement;
 public class Student {
   private String name;
   private int age;
+  private String hobby;
 
   public String getName() {
     return name;
@@ -18,5 +19,13 @@ public class Student {
 
   public void setAge(int age) {
     this.age = age;
+  }
+
+  public String getHobby() {
+    return hobby;
+  }
+
+  public void setHobby(String hobby) {
+    this.hobby = hobby;
   }
 }
