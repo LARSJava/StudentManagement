@@ -10,16 +10,16 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface StudentRepository {
 
-  @Select("SELECT * FROM students WHERE name = #{name}")
+  @Select("SELECT * FROM student WHERE name = #{name}")
   Student searchByName(String name);
 
-  @Insert("INSERT into students values(#{name},#{age},#{hobby})")
+  @Insert("INSERT into student values(#{name},#{age},#{hobby})")
   void registerStudent(String name, int age, String hobby);
 
-  @Update("UPDATE students SET age = #{age} WHERE name = #{name}")
+  @Update("UPDATE student SET age = #{age} WHERE name = #{name}")
   void updateStudent(String name,int age,String hobby);
 
-  @Delete("DELETE FROM students WHERE name = #{name}")
+  @Delete("DELETE FROM student WHERE name = #{name}")
   void deleteStudent(String name);
 
 }
