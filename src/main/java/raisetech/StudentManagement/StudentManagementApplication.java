@@ -10,3 +10,8 @@ public class StudentManagementApplication {
 		SpringApplication.run(StudentManagementApplication.class, args);
 	}
 }
+
+//タスクの見積もり方
+//・全体像を把握する or 目的が何なのか。
+//・何をもって完了とするか。不明瞭なら必ず確認する。
+//・事前条件の確認。
