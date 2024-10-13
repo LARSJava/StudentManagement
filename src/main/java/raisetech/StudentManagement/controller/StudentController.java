@@ -41,8 +41,14 @@ public class StudentController {
       return service.searchStudentCourseList();
     };
 
+  @GetMapping("/newStudent")
+  public String newStudent(Model model){
+    model.addAttribute("studentDetail",new StudentDetail());
+    return "registerStudent";
+  }
+
   @PostMapping("/registerStudent")
   public String registerStudent(@ModelAttribute StudentDetail studentDetail){
-    return a;
+    return "";
   }
 }
