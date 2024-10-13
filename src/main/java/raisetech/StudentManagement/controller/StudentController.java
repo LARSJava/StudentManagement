@@ -30,9 +30,9 @@ public class StudentController {
   @GetMapping("/studentList")
   public String getStudentList(Model model){
     List<Student> students = service.searchStudentList();
-    List<StudentsCourses> studentsCours = service.searchStudentCourseList();
+    List<StudentsCourses> studentsCourses = service.searchStudentCourseList();
 
-    model.addAttribute("studentList",converter.convertStudentDetails(students, studentsCours));
+    model.addAttribute("studentList",converter.convertStudentDetails(students, studentsCourses));
     return "studentList";
   }
 
