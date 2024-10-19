@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.data.StudentCourse;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
@@ -32,14 +32,14 @@ public class StudentController {
   @GetMapping("/studentList")
   public String getStudentList(Model model){
     List<Student> students = service.searchStudentList();
-    List<StudentsCourses> studentsCourses = service.searchStudentCourseList();
+    List<StudentCourse> studentsCourses = service.searchStudentCourseList();
 
     model.addAttribute("studentList",converter.convertStudentDetails(students, studentsCourses));
     return "studentList";
   }
 
   @GetMapping("/studentcourses")
-  public List<StudentsCourses> getStudentCourseList(){
+  public List<StudentCourse> getStudentCourseList(){
       return service.searchStudentCourseList();
     };
 

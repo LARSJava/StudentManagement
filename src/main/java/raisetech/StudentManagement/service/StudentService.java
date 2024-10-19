@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.data.StudentCourse;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.repository.StudentRepository;
 
@@ -23,7 +23,7 @@ public class StudentService {
     return repository.searchStudentList();
   }
 
-  public List<StudentsCourses> searchStudentCourseList(){
+  public List<StudentCourse> searchStudentCourseList(){
     return repository.searchStudentCourseList();
   }
 

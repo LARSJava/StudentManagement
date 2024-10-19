@@ -5,9 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.transaction.annotation.Transactional;
 import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentsCourses;
+import raisetech.StudentManagement.data.StudentCourse;
 
 @Mapper
 public interface StudentRepository {
@@ -16,7 +15,7 @@ public interface StudentRepository {
   List<Student> searchStudentList();
 
   @Select("SELECT * FROM students_courses")
-  List<StudentsCourses> searchStudentCourseList();
+  List<StudentCourse> searchStudentCourseList();
 
   @Insert("INSERT INTO students(name, furigana, nickname, email, region, age, gender, remark, is_deleted) "
       + "VALUES (#{name}, #{furigana}, #{nickname}, #{email}, #{region}, #{age}, #{gender}, #{remark}, false)")
