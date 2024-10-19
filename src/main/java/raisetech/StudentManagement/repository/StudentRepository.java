@@ -20,5 +20,10 @@ public interface StudentRepository {
   @Insert("INSERT INTO students(name, furigana, nickname, email, region, age, gender, remark, is_deleted) "
       + "VALUES (#{name}, #{furigana}, #{nickname}, #{email}, #{region}, #{age}, #{gender}, #{remark}, false)")
   @Options(useGeneratedKeys = true, keyProperty = "id")
-  void registerStudent(Student student);//
+  void registerStudent(Student student);
+
+  @Insert("INSERT INTO students_courses(student_id, course, classopen, classcomp)"
+  + "VALUES(#{studentId},#{course},#{classopen},#{classcomp})")
+  @Options(useGeneratedKeys = true, keyProperty = "id")
+  void registerStudentsCourses(StudentCourse studentCourse);
 }

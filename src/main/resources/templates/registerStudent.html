@@ -63,8 +63,10 @@
   </div>
 
   <div class="form-group" th:each="course, stat : *{studentsCourses}">
-    <label for="courseName">受講コース名</label>
-    <input type="text" id="courseName" th:id="studentCourse.__${stat.index}__.courseName" th:field="*{studentsCourses[__${stat.index}__].courseName" />
+    <label for="course">受講コース名</label>
+    <input type="text" id="course"
+           th:id="studentCourse.__${stat.index}__.course"
+           th:field="*{studentsCourses[__${stat.index}__].course}" />
   </div>
   <div>
     <button type="submit">登録</button>
