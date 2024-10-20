@@ -16,26 +16,43 @@ public class StudentService {
   private StudentRepository repository;
 
   @Autowired
-  public StudentService(StudentRepository repository){
+  public StudentService(StudentRepository repository) {
     this.repository = repository;
   }
 
-  public List<Student> searchStudentList(){
+  public List<Student> searchStudentList() {
     return repository.searchStudentList();
   }
 
-  public List<StudentCourse> searchStudentCourseList(){
+  public StudentDetail searchStudent(String id) {
+    Student student = repository.searchStudent(id);
+    List<StudentCourse> studentCourse = repository.searchStudentsCourses(student.getId());
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.setStudent(student);
+    studentDetail.setStudentsCourses(studentCourse);
+    return studentDetail;
+  }
+
+  public List<StudentCourse> searchStudentCourseList() {
     return repository.searchStudentCourseList();
   }
 
   @Transactional
   public void registerStudent(StudentDetail studentDetail) {
     repository.registerStudent(studentDetail.getStudent());
-    for(StudentCourse studentCourse : studentDetail.getStudentsCourses()){
+    for (StudentCourse studentCourse : studentDetail.getStudentsCourses()) {
       studentCourse.setStudentId(studentDetail.getStudent().getId());
       studentCourse.setClassopen(LocalDateTime.now());
       studentCourse.setClasscomp(LocalDateTime.now().plusYears(1));
       repository.registerStudentsCourses(studentCourse);
+    }
+  }
+
+  @Transactional
+  public void updateStudent(StudentDetail studentDetail) {
+    repository.updateStudent(studentDetail.getStudent());
+    for (StudentCourse studentCourse : studentDetail.getStudentsCourses()) {
+      repository.updateStudentsCourses(studentCourse);
     }
   }
 }
