@@ -13,7 +13,7 @@ import raisetech.StudentManagement.data.StudentCourse;
 public interface StudentRepository {
 
   @Select("SELECT * FROM students")
-  List<Student> searchStudentList();
+  List<Student> search();
 
   @Select("SELECT * FROM students WHERE id = #{id}")
   Student searchStudent(String id);
@@ -34,10 +34,10 @@ public interface StudentRepository {
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void registerStudentsCourses(StudentCourse studentCourse);
 
-  @Update("UPDATE students SET(name = #{name}, furigana = #{furigana}, nickname = #{nickname}, email = #{email},"
-      + " region = #{region}, age = #{age}, gender = #{gender}, remark = #{remark}, is_deleted = #{isDeleted}) WHERE id = #{id}")
+  @Update("UPDATE students SET name = #{name}, furigana = #{furigana}, nickname = #{nickname}, email = #{email},"
+      + " region = #{region}, age = #{age}, gender = #{gender}, remark = #{remark}, is_deleted = #{isDeleted} WHERE id = #{id}")
   void updateStudent(Student student);
 
-  @Update("UPDATE students_courses SET(course = #{course}　WHERE id = #{id}")
+  @Update("UPDATE students_courses SET course = #{course} WHERE id = #{id}")
   void updateStudentsCourses(StudentCourse studentCourse);
 }
