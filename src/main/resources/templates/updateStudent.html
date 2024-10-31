@@ -67,10 +67,15 @@
     <input type="text" id="remark" th:field="*{student.remark}" required />
   </div>
 
+  <div class="form-group">
+    <label for="isDeleted">キャンセル:</label>
+    <input type="text" id="isDeleted" th:field="*{student.isDeleted}" required />
+  </div>
+
   <div class="form-group" th:each="id, stat : *{studentsCourses}">
-    <label for="id"
+    <label for="studentCourseId"
            th:for="studentCourse.__${stat.index}__.id">受講コースID:</label>
-    <input type="text" id="id"
+    <input type="text" id="studentCourseId"
            th:id="studentCourse.__${stat.index}__.id"
            th:field="*{studentsCourses[__${stat.index}__].id}" />
   </div>
