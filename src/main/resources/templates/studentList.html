@@ -35,7 +35,9 @@
     <td th:text="${studentDetail.student.age}">25</td>
     <td th:text="${studentDetail.student.gender}">男性</td>
     <td th:text="${studentDetail.student.remark}">レシーブ＆ファーマー指向</td>
-    <td th:text="${studentDetail.student.isDeleted}">なし</td>
+    <td>
+        <input type="checkbox" th:checked="${studentDetail.student.isDeleted}"/>
+    </td>
   </tr>
   </tbody>
 </table>
