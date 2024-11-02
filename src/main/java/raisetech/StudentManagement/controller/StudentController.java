@@ -39,12 +39,13 @@ public class StudentController {
     return "studentList";
   }
 
-  @GetMapping("/studentcourses")
-  public List<StudentCourse> getStudentCourseList(){
-      return service.searchStudentCourseList();
-    };
+  @GetMapping("/student/{id}")
+  public String getStudent(@PathVariable String id, Model model){
+    StudentDetail studentDetail = service.searchStudent(id);
+    model.addAttribute("studentDetail", studentDetail);
+    return "updateStudent";
+  }
 
-  //登録
   @GetMapping("/newStudent")
   public String newStudent(Model model){
     StudentDetail studentDetail = new StudentDetail();
@@ -62,15 +63,7 @@ public class StudentController {
      return "redirect:/studentList";
   }
 
-  //更新
-  @GetMapping("/student/{id}")
-  public String getStudent(@PathVariable String id, Model model){
-    StudentDetail studentDetail = service.searchStudent(id);
-    model.addAttribute("studentDetail", studentDetail);
-    return "updateStudent";
-  }
-
-  @PostMapping("/student/{id}")
+  @PostMapping("/updateStudent")
   public String updateStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result) {
     if (result.hasErrors()) {
       return "updateStudent";

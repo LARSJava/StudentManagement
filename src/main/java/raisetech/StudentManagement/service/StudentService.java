@@ -21,7 +21,7 @@ public class StudentService {
   }
 
   public List<Student> searchStudentList() {
-    return repository.searchStudentList();
+    return repository.search();
   }
 
   public StudentDetail searchStudent(String id) {
@@ -37,6 +37,7 @@ public class StudentService {
     return repository.searchStudentCourseList();
   }
 
+  //レジスタートランザクショナル
   @Transactional
   public void registerStudent(StudentDetail studentDetail) {
     repository.registerStudent(studentDetail.getStudent());
@@ -48,6 +49,7 @@ public class StudentService {
     }
   }
 
+  //アップデートトランザクショナル
   @Transactional
   public void updateStudent(StudentDetail studentDetail) {
     repository.updateStudent(studentDetail.getStudent());

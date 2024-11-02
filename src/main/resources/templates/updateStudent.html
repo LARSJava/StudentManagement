@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>受講生更新</title>
+  <title>受講生詳細</title>
   <style>
 
     .form-group {
@@ -21,6 +21,11 @@
 <body>
 <h1>受講生更新</h1>
 <form th:action="@{/updateStudent}" th:object="${studentDetail}" method="post">
+
+  <div class="form-group">
+    <label for="id">ID:</label>
+    <input type="text" id="id" th:field="*{student.id}" required />
+  </div>
 
   <div class="form-group">
     <label for="name">名前:</label>
@@ -62,8 +67,17 @@
     <input type="text" id="remark" th:field="*{student.remark}" required />
   </div>
 
+  <div class="form-group" th:each="id, stat : *{studentsCourses}">
+    <label for="id"
+           th:for="studentCourse.__${stat.index}__.id">受講コースID:</label>
+    <input type="text" id="id"
+           th:id="studentCourse.__${stat.index}__.id"
+           th:field="*{studentsCourses[__${stat.index}__].id}" />
+  </div>
+
   <div class="form-group" th:each="course, stat : *{studentsCourses}">
-    <label for="course">受講コース名</label>
+    <label for="course"
+           th:for="studentCourse.__${stat.index}__.course">受講コース名:</label>
     <input type="text" id="course"
            th:id="studentCourse.__${stat.index}__.course"
            th:field="*{studentsCourses[__${stat.index}__].course}" />
