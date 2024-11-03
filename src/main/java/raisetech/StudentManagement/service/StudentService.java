@@ -39,7 +39,7 @@ public class StudentService {
 
   //レジスタートランザクショナル
   @Transactional
-  public void registerStudent(StudentDetail studentDetail) {
+  public StudentDetail registerStudent(StudentDetail studentDetail) {
     repository.registerStudent(studentDetail.getStudent());
     for (StudentCourse studentCourse : studentDetail.getStudentsCourses()) {
       studentCourse.setStudentId(studentDetail.getStudent().getId());
@@ -47,6 +47,7 @@ public class StudentService {
       studentCourse.setClasscomp(LocalDateTime.now().plusYears(1));
       repository.registerStudentsCourses(studentCourse);
     }
+    return studentDetail;
   }
 
   //アップデートトランザクショナル
