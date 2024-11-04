@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.StudentManagement.controller.converter.StudentConverter;
-import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentCourse;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
@@ -22,32 +19,47 @@ import raisetech.StudentManagement.service.StudentService;
 public class StudentController {
 
   private StudentService service;
-  private StudentConverter converter;
 
   @Autowired
-  public StudentController(StudentService service, StudentConverter converter){
+  public StudentController(StudentService service){
     this.service = service;
-    this.converter = converter;
   }
 
+  /*
+    受講生一覧検索です。
+    全件検索を行うので条件指定は行いません。
+
+    @return 受講生一覧(全件)
+   */
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentList(){
-    List<Student> students = service.searchStudentList();
-    List<StudentCourse> studentsCourses = service.searchStudentCourseList();
-    return converter.convertStudentDetails(students, studentsCourses);
+    return service.searchStudentList();
   }
 
+  /*
+    受講生検索です。
+    IDに紐づく任意の受講生の情報を取得します。
+
+    @param id 受講生ID
+    @return 受講生
+   */
   @GetMapping("/student/{id}")
   public StudentDetail getStudent(@PathVariable String id){
     return service.searchStudent(id);
   }
 
+  /*
+   受講生登録です
+   */
   @PostMapping("/registerStudent")
   public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail){
     StudentDetail responseStudentDetail = service.registerStudent(studentDetail);
      return ResponseEntity.ok(responseStudentDetail);
   }
 
+/*
+  受講生更新です。
+ */
   @PostMapping("/updateStudent")
   public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
     service.updateStudent(studentDetail);
