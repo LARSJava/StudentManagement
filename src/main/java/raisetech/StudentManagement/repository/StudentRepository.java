@@ -49,22 +49,31 @@ public interface StudentRepository {
   @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
   List<StudentCourse> searchStudentsCourses(String studentId);
 
-  //新規データ
+  /*
+    新規に受講生を登録します。
+   */
   @Insert("INSERT INTO students(name, furigana, nickname, email, region, age, gender, remark, is_deleted) "
       + "VALUES (#{name}, #{furigana}, #{nickname}, #{email}, #{region}, #{age}, #{gender}, #{remark}, false)")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void registerStudent(Student student);
 
+  /*
+    新規に受講生の受けるコース情報を登録します。
+   */
   @Insert("INSERT INTO students_courses(student_id, course, classopen, classcomp)"
   + "VALUES(#{studentId},#{course},#{classopen},#{classcomp})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void registerStudentsCourses(StudentCourse studentCourse);
 
-  //アップデート
+  /*
+    既存の受講生の情報を更新します。
+   */
   @Update("UPDATE students SET name = #{name}, furigana = #{furigana}, nickname = #{nickname}, email = #{email},"
       + " region = #{region}, age = #{age}, gender = #{gender}, remark = #{remark}, is_deleted = #{isDeleted} WHERE id = #{id}")
   void updateStudent(Student student);
-
+  /*
+    既存の受講生のコース情報を更新します。
+   */
   @Update("UPDATE students_courses SET course = #{course} WHERE id = #{id}")
   void updateStudentsCourses(StudentCourse studentCourse);
 }
