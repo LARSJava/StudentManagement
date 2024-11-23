@@ -1,5 +1,6 @@
 package raisetech.StudentManagement.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -40,11 +41,10 @@ public class StudentController {
 
     @return 受講生詳細一覧(全件)
    */
+  @Operation(summary = "一覧検索", description = "受講生の一覧を検索します。")
   @GetMapping("/studentList")
-  public List<StudentDetail> getStudentList() throws TestException{
-    throw new TestException(
-        "現在このAPIは利用できません。URLは「studentList」ではなく「students」を利用してください。");
-   //return service.searchStudentList();
+  public List<StudentDetail> getStudentList(){
+   return service.searchStudentList();
   }
 
   /*
@@ -54,6 +54,7 @@ public class StudentController {
     @param id 受講生ID
     @return 受講生
    */
+  @Operation(summary = "受講生検索", description = "受講生を検索します。")
   @GetMapping("/student/{id}")
   public StudentDetail getStudent(@PathVariable @NotBlank @Pattern(regexp = "\\d+$") String id){
     return service.searchStudent(id);
@@ -65,6 +66,7 @@ public class StudentController {
    @param studentDetail 受講生詳細
    @return 実行結果
    */
+  @Operation(summary = "受講生登録", description = "受講生を登録します。")
   @PostMapping("/registerStudent")
   public ResponseEntity<StudentDetail> registerStudent(@RequestBody @Valid StudentDetail studentDetail){
     StudentDetail responseStudentDetail = service.registerStudent(studentDetail);
@@ -77,12 +79,15 @@ public class StudentController {
   @param studentDetail 受講生詳細
   @return 実行結果
  */
+@Operation(summary = "受講生更新", description = "受講生の情報を更新します。")
   @PutMapping("/updateStudent")
   public ResponseEntity<String> updateStudent(@RequestBody @Valid StudentDetail studentDetail) {
     service.updateStudent(studentDetail);
     return ResponseEntity.ok("更新処理が成功しました。");
   }
 
+  @Operation(summary = "例外処理", description = "例外処理用クラスです")
+  @GetMapping("/handlerException")
   @ExceptionHandler(TestException.class)
   public ResponseEntity<String> handleTestException(TestException ex){
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
